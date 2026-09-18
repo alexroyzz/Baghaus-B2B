@@ -21,8 +21,6 @@ dotenv.config();
 
 const app = express();
 
-await connectDB();
-
 // Resolve current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,10 +88,24 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(
-    `BagHaus API running on port ${PORT} [${
-      process.env.NODE_ENV || "development"
-    }]`
-  );
-});
+// Start server
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(
+        `BagHaus API running on port ${PORT} [${
+          process.env.NODE_ENV || "development"
+        }]`
+      );
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+

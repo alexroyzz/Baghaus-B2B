@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-espresso font-sans antialiased;
+}
+
+::selection {
+  @apply bg-camel text-ivory;
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #8C6B3E;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.eyebrow {
+  @apply text-xs tracking-widest2 uppercase font-medium text-camel;
+}
+
+.section {
+  @apply px-6 sm:px-10 lg:px-16 xl:px-24;
+}
+
+.container-max {
+  @apply max-w-8xl mx-auto;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm tracking-wide uppercase font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-primary {
+  @apply btn bg-espresso text-ivory shadow-sm hover:bg-camel hover:shadow-md;
+}
+
+.btn-outline {
+  @apply btn border border-espresso text-espresso hover:bg-espresso hover:text-ivory hover:shadow-md;
+}
+
+.btn-accent {
+  @apply btn bg-camel text-espresso border border-brass/40 shadow-sm hover:bg-brass hover:shadow-md;
+}
+
+.btn-whatsapp {
+  @apply btn bg-[#25D366] text-white shadow-sm hover:bg-[#1DA851] hover:shadow-md;
+}
+
+.btn-ghost {
+  @apply btn hover:!translate-y-0 text-espresso hover:text-camel;
+}
+
+/* Leather "spec tag" signature element - stitched-edge hangtag look */
+.spec-tag {
+  position: relative;
+  border: 1px dashed rgba(27, 23, 18, 0.25);
+  @apply rounded-card;
+}
+.spec-tag::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #8C6B3E;
+  box-shadow: 0 0 0 2px rgba(140, 107, 62, 0.2);
+}
+
+.grain-overlay {
+  @apply bg-grain pointer-events-none absolute inset-0;
+}
+
+/* Premium full-screen hero on desktop: 100vh with a 100dvh upgrade where
+   supported, so browsers with a collapsing address bar don't leave a
+   gap/jump. On mobile the hero instead sizes to its content (see the
+   max-width: 639px override below) so the banner crops right after the
+   hero content and the Categories section starts immediately below it. */
+.hero-full {
+  height: 100vh;
+  min-height: 560px;
+}
+@supports (height: 100dvh) {
+  .hero-full {
+    height: 100dvh;
+  }
+}
+@media (max-width: 639px) {
+  .hero-full {
+    height: 440px;
+    min-height: 330px;
+  }
+}
+
+.input {
+  @apply w-full bg-transparent border border-espresso/20 rounded-xl px-4 py-3 text-sm text-espresso placeholder:text-espresso/40 focus:border-camel outline-none transition-colors;
+}
+
+/* Shared "premium image frame" treatment: soft 24–32px rounding, a subtle
+   resting shadow, and a slightly deeper shadow on hover, so every product
+   photo, category image and about-page image reads as one consistent,
+   editorial card style. */
+.img-frame {
+  @apply rounded-card lg:rounded-card-lg overflow-hidden bg-bone shadow-card transition-shadow duration-500;
+}
+.group:hover .img-frame,
+.img-frame:hover {
+  @apply shadow-card-hover;
+}
+
+/* Shared boxed "panel" treatment for non-image card surfaces — spec
+   sheets, contact/quote forms, modals — matching the same soft radius. */
+.panel-surface {
+  @apply rounded-card lg:rounded-card-lg shadow-card;
+}
+
+/* Hides the scrollbar on horizontal-scroll rows (e.g. category rail on
+   mobile) while keeping the element scrollable via touch/drag/wheel. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

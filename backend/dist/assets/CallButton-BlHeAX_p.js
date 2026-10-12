@@ -1,0 +1,1 @@
+import{u as c,j as t,w as r}from"./index-Cx9_HZL_.js";const n={primary:"btn-primary",outline:"btn-outline",accent:"btn-accent"},l=({variant:s="accent",label:e="Call Now"})=>{const{settings:a}=c(),o=a.phone||"";return t.jsxs("a",{href:`tel:${o}`,className:n[s]||n.accent,children:[t.jsx(r,{size:16}),e]})};export{l as C};

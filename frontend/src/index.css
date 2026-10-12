@@ -1,0 +1,427 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-espresso font-sans antialiased;
+}
+
+::selection {
+  @apply bg-camel text-ivory;
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #8C6B3E;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.eyebrow {
+  @apply text-xs tracking-widest2 uppercase font-medium text-camel;
+}
+
+.section {
+  @apply px-6 sm:px-10 lg:px-16 xl:px-24;
+}
+
+.container-max {
+  @apply max-w-8xl mx-auto;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm tracking-wide uppercase font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-primary {
+  @apply btn bg-espresso text-ivory shadow-sm hover:bg-camel hover:shadow-md;
+}
+
+.btn-outline {
+  @apply btn border border-espresso text-espresso hover:bg-espresso hover:text-ivory hover:shadow-md;
+}
+
+.btn-accent {
+  @apply btn bg-camel text-espresso border border-brass/40 shadow-sm hover:bg-brass hover:shadow-md;
+}
+
+.btn-whatsapp {
+  @apply btn bg-[#25D366] text-white shadow-sm hover:bg-[#1DA851] hover:shadow-md;
+}
+
+.btn-ghost {
+  @apply btn hover:!translate-y-0 text-espresso hover:text-camel;
+}
+
+/* Leather "spec tag" signature element - stitched-edge hangtag look */
+.spec-tag {
+  position: relative;
+  border: 1px dashed rgba(27, 23, 18, 0.25);
+  @apply rounded-card;
+}
+.spec-tag::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #8C6B3E;
+  box-shadow: 0 0 0 2px rgba(140, 107, 62, 0.2);
+}
+
+.grain-overlay {
+  @apply bg-grain pointer-events-none absolute inset-0;
+}
+
+/* Premium full-screen hero on desktop: 100vh with a 100dvh upgrade where
+   supported, so browsers with a collapsing address bar don't leave a
+   gap/jump. On mobile the hero instead sizes to its content (see the
+   max-width: 639px override below) so the banner crops right after the
+   hero content and the Categories section starts immediately below it. */
+.hero-full {
+  height: 100vh;
+  min-height: 560px;
+}
+@supports (height: 100dvh) {
+  .hero-full {
+    height: 100dvh;
+  }
+}
+@media (max-width: 639px) {
+  .hero-full {
+    height: 440px;
+    min-height: 330px;
+  }
+}
+
+.input {
+  @apply w-full bg-transparent border border-espresso/20 rounded-xl px-4 py-3 text-sm text-espresso placeholder:text-espresso/40 focus:border-camel outline-none transition-colors;
+}
+
+/* Shared "premium image frame" treatment: soft 24–32px rounding, a subtle
+   resting shadow, and a slightly deeper shadow on hover, so every product
+   photo, category image and about-page image reads as one consistent,
+   editorial card style. */
+.img-frame {
+  @apply rounded-card lg:rounded-card-lg overflow-hidden bg-bone shadow-card transition-shadow duration-500;
+}
+.group:hover .img-frame,
+.img-frame:hover {
+  @apply shadow-card-hover;
+}
+
+/* Shared boxed "panel" treatment for non-image card surfaces — spec
+   sheets, contact/quote forms, modals — matching the same soft radius. */
+.panel-surface {
+  @apply rounded-card lg:rounded-card-lg shadow-card;
+}
+
+/* Hides the scrollbar on horizontal-scroll rows (e.g. category rail on
+   mobile) while keeping the element scrollable via touch/drag/wheel. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Customer testimonials: measured, equal-width groups keep the marquee loop seamless. */
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 0 6rem;
+  background: #f6f2ea;
+}
+
+.testimonials-heading {
+  position: relative;
+  z-index: 1;
+  padding: 0 1.25rem;
+  margin: 0 auto 2.75rem;
+  text-align: center;
+}
+
+.testimonials-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  color: #a88d72;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.testimonials-eyebrow span {
+  width: clamp(2.5rem, 5vw, 5rem);
+  height: 1px;
+  background: #cdbca8;
+}
+
+.testimonials-heading h2 {
+  margin: 0;
+  color: #1b1712;
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(2.25rem, 5.3vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.testimonials-title-accent {
+  color: #74583d;
+}
+
+.testimonials-subtitle {
+  margin: 0.75rem auto 0;
+  color: #716b65;
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.testimonials-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding-left: max(1.25rem, calc((100vw - 1320px) / 2));
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  animation: testimonials-marquee var(--testimonial-duration, 42s) linear infinite;
+  will-change: transform;
+}
+
+.testimonial-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.testimonial-card {
+  position: relative;
+  display: flex;
+  flex: 0 0 clamp(300px, calc((100vw - 8rem) / 3), 390px);
+  flex-direction: column;
+  min-height: 270px;
+  padding: 2rem 2rem 1.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(183, 158, 129, 0.14);
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, rgba(255, 253, 249, 0.98), rgba(250, 246, 239, 0.98));
+  box-shadow: 0 8px 26px rgba(67, 49, 31, 0.055);
+}
+
+.testimonial-quote {
+  position: absolute;
+  top: 0.35rem;
+  right: 1.35rem;
+  color: rgba(185, 166, 146, 0.4);
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.testimonial-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-right: 2rem;
+}
+
+.testimonial-avatar {
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  flex: 0 0 4.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #efe4d6;
+  color: #332a22;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.8rem;
+}
+
+.testimonial-customer h3 {
+  margin: 0 0 0.35rem;
+  color: #26211c;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 0.3rem;
+  color: #bd8b4e;
+  font-size: 1rem;
+}
+
+.testimonial-divider {
+  display: block;
+  width: 4.25rem;
+  height: 1px;
+  margin: 1.5rem 0 1rem;
+  background: #cbb79f;
+}
+
+.testimonial-review {
+  margin: 0;
+  color: #5f5d5a;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+@keyframes testimonials-marquee {
+  to {
+    transform: translateX(var(--testimonial-distance, -50%));
+  }
+}
+
+.testimonials-status {
+  min-height: 270px;
+  display: grid;
+  place-items: center;
+  margin: 0 1.25rem;
+  color: #716b65;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .testimonial-card {
+    flex-basis: clamp(300px, calc((100vw - 4rem) / 2), 390px);
+  }
+
+  .testimonials-status {
+    min-height: 238px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .testimonials-heading {
+    margin-bottom: 2rem;
+  }
+
+  .testimonials-heading h2 {
+    max-width: 22rem;
+    margin-inline: auto;
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+  }
+
+  .testimonials-subtitle {
+    max-width: 22rem;
+    font-size: 0.95rem;
+  }
+
+  .testimonials-viewport {
+    padding-left: 1.1rem;
+  }
+
+  .testimonial-group {
+    gap: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+  .testimonial-card {
+    flex-basis: min(82vw, 360px);
+    min-height: 238px;
+    padding: 1.5rem 1.35rem 1.35rem;
+    border-radius: 1.35rem;
+  }
+
+  .testimonial-quote {
+    top: 0.2rem;
+    right: 1rem;
+    font-size: 4rem;
+  }
+
+  .testimonial-card-heading {
+    gap: 0.9rem;
+  }
+
+  .testimonial-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-basis: 3.5rem;
+    font-size: 1.5rem;
+  }
+
+  .testimonial-customer h3 {
+    font-size: 1.15rem;
+  }
+
+  .testimonial-stars {
+    gap: 0.22rem;
+    font-size: 0.9rem;
+  }
+
+  .testimonial-divider {
+    margin: 1.25rem 0 0.85rem;
+  }
+
+  .testimonial-review {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .testimonials-section:hover .testimonial-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .testimonials-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-track {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .testimonial-card {
+    scroll-snap-align: start;
+  }
+}

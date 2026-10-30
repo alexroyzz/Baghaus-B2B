@@ -4,12 +4,6 @@ node_modules/
 # Environment variables
 .env
 
-# Build files
-frontend/dist/
-/backend/dist/
-/backend/node_modules/
-build/
-
 # Logs
 *.log
 npm-debug.log*

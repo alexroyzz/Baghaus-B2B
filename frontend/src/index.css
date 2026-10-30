@@ -1,0 +1,596 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  @apply bg-ivory text-espresso font-sans antialiased;
+}
+
+::selection {
+  @apply bg-camel text-ivory;
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #8C6B3E;
+  outline-offset: 3px;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.eyebrow {
+  @apply text-xs tracking-widest2 uppercase font-medium text-brass;
+}
+
+/* Shared centred "section heading group": eyebrow + heading + optional intro
+   text. Centres only the text group (not the content below it) and gives
+   every section the same eyebrow -> heading -> description rhythm at all
+   breakpoints. Typography stays with the existing utility classes.
+   Add `section-heading--wide` for a longer intro line. */
+.section-heading {
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.section-heading--wide {
+  max-width: 48rem;
+}
+.section-heading > :is(.eyebrow, .testimonials-eyebrow) {
+  margin-block: 0 0.75rem;
+}
+.section-heading > :is(h1, h2) {
+  margin-block: 0;
+}
+.section-heading > :is(h1, h2) + p:not(.eyebrow) {
+  margin-top: 1rem;
+}
+
+/* One horizontal gutter shared by every section, scroll row and the
+   testimonials strip so edges always line up. 20px on very small phones
+   gives 2-column product cards enough room; 24px from 400px up. */
+:root {
+  --gutter: 1.25rem;
+}
+@media (min-width: 400px) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+.section {
+  @apply px-[var(--gutter)] sm:px-10 lg:px-16 xl:px-24;
+}
+
+/* Horizontal scroll row that bleeds to the screen edges on phones while its
+   first/last item still line up with the page gutter (scroll-padding keeps
+   scroll-snap from pushing the first item under the edge). */
+.bleed-x {
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+@media (min-width: 640px) {
+  .bleed-x {
+    margin-inline: 0;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+}
+
+/* w-full + min-w-0: inside a flex/grid parent, `mx-auto` switches off the
+   default stretch and makes the box shrink-to-fit its content, which let a
+   horizontally scrolling child (e.g. the category row) blow the whole page
+   wider than the viewport. Pinning width to the parent fixes the root cause. */
+.container-max {
+  @apply w-full min-w-0 max-w-8xl mx-auto;
+}
+
+.btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm tracking-wide uppercase font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-primary {
+  @apply btn bg-espresso text-ivory shadow-sm hover:bg-charcoal hover:shadow-md;
+}
+
+.btn-outline {
+  @apply btn border border-espresso/70 text-espresso hover:border-espresso hover:bg-espresso hover:text-ivory;
+}
+
+.btn-accent {
+  @apply btn bg-brass text-ivory border border-brass shadow-sm hover:bg-espresso hover:border-espresso;
+}
+
+.btn-whatsapp {
+  @apply btn bg-[#25D366] text-white shadow-sm hover:bg-[#1DA851] hover:shadow-md;
+}
+
+.btn-ghost {
+  @apply btn hover:!translate-y-0 text-espresso hover:text-camel;
+}
+
+/* Leather "spec tag" signature element - stitched-edge hangtag look */
+.spec-tag {
+  position: relative;
+  border: 1px dashed rgba(27, 23, 18, 0.25);
+  @apply rounded-card;
+}
+.spec-tag::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #8C6B3E;
+  box-shadow: 0 0 0 2px rgba(140, 107, 62, 0.2);
+}
+
+.grain-overlay {
+  @apply bg-grain pointer-events-none absolute inset-0;
+}
+
+/* Premium full-screen hero on desktop: 100vh with a 100dvh upgrade where
+   supported, so browsers with a collapsing address bar don't leave a
+   gap/jump. On mobile the hero height follows its content. */
+.hero-full {
+  height: 100vh;
+  min-height: 560px;
+}
+@supports (height: 100dvh) {
+  .hero-full {
+    height: 100dvh;
+  }
+}
+@media (max-width: 639px) {
+  .hero-full {
+    height: auto;
+    min-height: 0;
+  }
+}
+
+/* Responsive CTA button group. Phones: full-width stacked buttons that all
+   share one width (no ragged, differently-sized wrapped buttons). From 480px
+   up they sit in a wrapping row. Add `cta-row--center` to centre the row. */
+.cta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.cta-row > * {
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 480px) {
+  .cta-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .cta-row > * {
+    width: auto;
+  }
+  .cta-row--center {
+    justify-content: center;
+  }
+}
+
+.input {
+  @apply min-h-11 w-full bg-transparent border border-espresso/20 rounded-xl px-4 py-3 text-sm text-espresso placeholder:text-espresso/40 focus:border-camel outline-none transition-colors;
+}
+
+/* Shared "premium image frame" treatment: soft 24–32px rounding, a subtle
+   resting shadow, and a slightly deeper shadow on hover, so every product
+   photo, category image and about-page image reads as one consistent,
+   editorial card style. */
+.img-frame {
+  @apply rounded-card lg:rounded-card-lg overflow-hidden bg-bone shadow-card transition-shadow duration-500;
+}
+.group:hover .img-frame,
+.img-frame:hover {
+  @apply shadow-card-hover;
+}
+
+/* Shared boxed "panel" treatment for non-image card surfaces — spec
+   sheets, contact/quote forms, modals — matching the same soft radius. */
+.panel-surface {
+  @apply rounded-card lg:rounded-card-lg shadow-card;
+}
+
+/* Customer testimonials use a duplicated track for a seamless marquee loop. */
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+  padding: 4.5rem 0 5rem;
+  background: #f6f2ea;
+}
+
+.testimonials-heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 90rem;
+  padding: 0 var(--gutter);
+  margin: 0 auto 2rem;
+}
+
+.testimonials-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #a88d72;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.testimonials-eyebrow span {
+  width: clamp(2.5rem, 5vw, 5rem);
+  height: 1px;
+  background: #cdbca8;
+}
+
+.testimonials-heading > div:first-child {
+  min-width: 0;
+}
+
+.testimonials-heading h2 {
+  color: #1b1712;
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(2rem, 4.3vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.testimonials-title-accent {
+  color: #74583d;
+}
+
+.testimonials-subtitle {
+  margin: 0;
+  color: #716b65;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.testimonials-viewport {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  overflow: hidden;
+  padding-inline: max(var(--gutter), calc((100vw - 1320px) / 2));
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.testimonials-viewport:active {
+  cursor: grabbing;
+}
+
+.testimonials-track,
+.testimonials-cycle {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+}
+
+.testimonials-cycle {
+  flex: 0 0 auto;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.testimonial-item {
+  display: flex;
+  flex: 0 0 clamp(280px, calc((min(100vw, 1320px) - 5rem) / 3), 370px);
+}
+
+.testimonial-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  min-height: 270px;
+  padding: 1.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(27, 23, 18, 0.1);
+  border-radius: 1.5rem;
+  background: #fffdf9;
+  box-shadow: 0 12px 35px rgba(57, 43, 26, 0.055);
+}
+
+.testimonial-card::after {
+  position: absolute;
+  top: 0.65rem;
+  right: 1.4rem;
+  color: rgba(168, 141, 114, 0.2);
+  content: "“";
+  font-family: Fraunces, Georgia, serif;
+  font-size: 6rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.testimonial-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 2rem;
+}
+
+.testimonial-avatar {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 3.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #efe8da;
+  color: #1b1712;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.7rem;
+}
+
+.testimonial-customer h3 {
+  margin: 0 0 0.35rem;
+  color: #1b1712;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 0.3rem;
+  color: #8c6b3e;
+  font-size: 1rem;
+}
+
+.testimonial-divider {
+  display: block;
+  width: 4.25rem;
+  height: 1px;
+  margin: 1.25rem 0 0.9rem;
+  background: #d9cbb6;
+}
+
+.testimonial-review {
+  margin: 0;
+  color: #514a43;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.testimonials-controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  gap: 0.5rem;
+}
+
+/* Tablet/desktop: keep the arrow buttons at the right edge, out of the way
+   of the centred heading group. */
+@media (min-width: 768px) {
+  .testimonials-controls {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 0;
+  }
+}
+
+.testimonials-controls button {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(27, 23, 18, 0.2);
+  border-radius: 9999px;
+  color: #1b1712;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.testimonials-controls button:hover {
+  background: #1b1712;
+  color: #fffdf9;
+}
+
+.testimonials-status {
+  min-height: 270px;
+  display: grid;
+  place-items: center;
+  margin: 0 1.25rem;
+  color: #716b65;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .testimonial-item {
+    flex-basis: clamp(280px, calc((100vw - 5rem) / 2), 360px);
+  }
+
+  .testimonials-status {
+    min-height: 238px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .testimonials-viewport {
+    box-sizing: border-box;
+    padding-inline: var(--gutter);
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .testimonials-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonials-heading {
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonials-heading h2 {
+    max-width: 100%;
+    font-size: clamp(1.75rem, 8vw, 2.7rem);
+  }
+
+  .testimonials-subtitle {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .testimonial-item {
+    flex-basis: calc(100vw - (2 * var(--gutter)));
+    min-width: 0;
+  }
+
+  .testimonial-card {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 270px;
+    padding: 1.35rem;
+  }
+
+  .testimonial-card::after {
+    top: 0.55rem;
+    right: 0.9rem;
+    font-size: 5.25rem;
+  }
+
+  .testimonial-card-heading {
+    min-width: 0;
+    gap: 0.85rem;
+    padding-right: 1.75rem;
+  }
+
+  .testimonial-customer {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .testimonial-customer h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .testimonial-avatar {
+    width: 3.25rem;
+    height: 3.25rem;
+    flex-basis: 3.25rem;
+    font-size: 1.4rem;
+  }
+
+  .testimonial-customer h3 {
+    font-size: 1.1rem;
+  }
+
+  .testimonial-stars {
+    gap: 0.22rem;
+    font-size: 0.9rem;
+  }
+
+  .testimonials-controls {
+    gap: 0.35rem;
+  }
+
+  .testimonials-controls button {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .testimonial-review {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .testimonials-controls button {
+    flex: 0 0 auto;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 375px) {
+  .testimonial-card {
+    min-height: 280px;
+    padding: 1.2rem;
+  }
+
+  .testimonial-card-heading {
+    gap: 0.7rem;
+    padding-right: 1.5rem;
+  }
+
+  .testimonial-avatar {
+    width: 3rem;
+    height: 3rem;
+    flex-basis: 3rem;
+  }
+
+  .testimonial-customer h3 {
+    font-size: 1rem;
+  }
+
+  .testimonial-stars {
+    gap: 0.18rem;
+    font-size: 0.82rem;
+  }
+
+  .testimonials-controls button {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-controls button {
+    transition: none;
+  }
+}

@@ -1,0 +1,30 @@
+# Baghaus
+
+Baghaus is a B2B wholesale bag supplier. The website is a product catalogue and enquiry platform for businesses; it does not offer an online cart, checkout, or online payment.
+
+## Business and products
+
+The catalogue is for wholesale and bulk enquiries. Baghaus's homepage features cotton and canvas tote bags for reusable shopping, retail, events, and brand promotions. The About page also describes handbags, totes, backpacks, clutches, and travel bags. Current products and specifications are listed in the live catalogue and may change.
+
+Baghaus accepts enquiries about custom bag designs and logo printing. Custom specifications, artwork, quantity, and timelines are agreed directly with the customer before production. Bulk and promotional or corporate-use enquiries can be discussed through the official contact channels.
+
+The site is intended for retailers, brands, distributors, and other businesses looking for wholesale products or custom bag enquiries.
+
+## Official pages
+
+- Homepage: https://baghaus.in/
+- About Baghaus: https://baghaus.in/about
+- Product catalogue: https://baghaus.in/products
+- Product categories: https://baghaus.in/categories
+- Contact and wholesale enquiries: https://baghaus.in/contact
+- Privacy policy: https://baghaus.in/privacy
+- Terms and conditions: https://baghaus.in/terms-and-conditions
+- XML sitemap, including active product pages: https://baghaus.in/sitemap.xml
+
+## Contact
+
+- Email: canvasbaghaus@gmail.com
+- WhatsApp: +91 7009271737 (https://wa.me/917009271737)
+- Enquiry form: https://baghaus.in/contact
+
+For current product availability, specifications, pricing, minimum quantities, and order terms, use the product catalogue and confirm details directly with Baghaus. Product enquiries do not themselves place or confirm an order.
